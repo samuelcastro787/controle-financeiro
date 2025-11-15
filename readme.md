@@ -40,3 +40,4 @@ Baixe a versão para Android do projeto clicando no link abaixo:
 ## 📸 Demonstração
 
 ![Preview do projeto](/img/preview.png)
+![Preview do projeto](/img/preview%202.png.png)
