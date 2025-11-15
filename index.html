@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Controle Financeiro</title>
+</head>
+
+<body>
+
+    <div class="container" id="container">
+        <div class="trilho" id="trilho">
+            <div class="indicador"><h6>Dark</h6></div>
+        </div>
+        <h1>Controle Financeiro</h1>
+
+        <select id="mes">
+            <option value="Janeiro">Janeiro</option>
+            <option value="Fevereiro">Fevereiro</option>
+            <option value="Março">Março</option>
+            <option value="Abril">Abril</option>
+            <option value="Maio">Maio</option>
+            <option value="Junho">Junho</option>
+            <option value="Julho">Julho</option>
+            <option value="Agosto">Agosto</option>
+            <option value="Setembro">Setembro</option>
+            <option value="Outubro">Outubro</option>
+            <option value="Novembro">Novembro</option>
+            <option value="Dezembro" selected>Dezembro</option>
+        </select>
+
+        <form>
+            <div class="inputs" id="input">
+                <input type="text" id="descrição" placeholder="Descrição">
+                <input type="text" id="valor" inputmode="decimal" placeholder="Valor">
+                <input type="date" id="vencimento" placeholder="Vencimento">
+                <input type="text" id="categoria" placeholder="Categoria">
+                <input type="number" id="parcelas" placeholder="Parcelas">
+                <div class="gasto-fixo">
+                    <input type="checkbox" id="fixo">
+                    <label for="fixo">Gasto fixo</label>
+                </div>
+            </div>
+            <button type="submit">Adicionar</button>
+        </form>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Categoria</th>
+                        <th>Parcelas</th>
+                        <th>Vencimento</th>
+                        <th>Pago</th>
+                        <th>Excluir</th>
+                    </tr>
+                </thead>
+                <tbody id="despesas"></tbody>
+            </table>
+        </div>
+
+        <div class="total">
+            <h3>Total: <span id="total">R$ 0,00</span></h3>
+        </div>
+    </div>
+
+    <footer>
+        <p>Desenvolvido por 
+            <a href="https://github.com/samuelcastro787" target="_blank" rel="noopener noreferrer">
+                <strong>Samuel Castro</strong>
+            </a>
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
