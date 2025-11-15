@@ -30,6 +30,13 @@ Um sistema simples e eficiente de **Controle Financeiro** desenvolvido com **HTM
 
 ---
 
+## 📱 Download do Aplicativo (APK)
+
+Baixe a versão para Android do projeto clicando no link abaixo:
+
+👉 **[📥 Download do APK](app/Controle%20Financeiro.apk)**  
+
+
 ## 📸 Demonstração
 
 ![Preview do projeto](/img/preview.png)
