@@ -214,7 +214,7 @@ function renderCategoriasLista() {
         ${cat.nome}
       </span>
 
-      <button onclick="removerCategoria(${cat.id})" style="background-color: #D1665E; margin-top: 10px;">
+      <button onclick="removerCategoria(${cat.id})" style="background-color: #D1665E; margin-top: 13px; color: white; border-radius: 20px; border: none;">
         Excluir
       </button>
     `;
