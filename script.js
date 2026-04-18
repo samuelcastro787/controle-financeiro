@@ -373,7 +373,7 @@ function render() {
       </div>
 
       <div class="botoes">
-        <button onclick="editar(${d.id})" style="color: white;">Editar</button>
+        <button onclick="editar(${d.id})" style="color: White;">Editar</button>
         <button onclick="remover(${d.id})">Excluir</button>
       </div>
     `;
