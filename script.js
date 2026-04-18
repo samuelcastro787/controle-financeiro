@@ -214,7 +214,7 @@ function renderCategoriasLista() {
         ${cat.nome}
       </span>
 
-      <button onclick="removerCategoria(${cat.id})">
+      <button onclick="removerCategoria(${cat.id})" style="background-color: #D1665E; margin-top: 10px;">
         Excluir
       </button>
     `;
@@ -442,7 +442,7 @@ render();
 // ==== SERVICE WORKER (PWA) ====
 // ===============================
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js")
+  //navigator.serviceWorker.register("service-worker.js")
     .then((reg) => {
       console.log("Service Worker registrado");
 
