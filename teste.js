@@ -1,6 +1,4 @@
-// ===============================
-// ==== ELEMENTOS DO DOM ====
-// ===============================
+// ====Botão de Adicionar====//
 const btnAdicionar = document.getElementById("btnAdicionar");
 const modal = document.getElementById("modal");
 const fecharModal = document.getElementById("fecharModal");
@@ -8,43 +6,6 @@ const topo = document.getElementById("topo");
 const filtroCategoria = document.getElementById("filtroCategoria");
 const totalCategoriaSpan = document.getElementById("totalCategoria");
 
-const form = document.getElementById("formDespesa");
-const tabela = document.getElementById("despesas");
-const totalSpan = document.getElementById("total");
-const selectMes = document.getElementById("mes");
-const selectCategoria = document.getElementById("categoria");
-const modalCategoria = document.getElementById("modalCategoria");
-
-// ===============================
-// ==== ESTADO DA APLICAÇÃO ====
-// ===============================
-let despesas = [];
-let categorias = [];
-let editandoId = null;
-let idParaExcluir = null;
-window.remover = remover;
-
-// ===============================
-// ==== LISTA DE MESES ====
-// ===============================
-const meses = [
-  "Janeiro",
-  "Fevereiro",
-  "Março",
-  "Abril",
-  "Maio",
-  "Junho",
-  "Julho",
-  "Agosto",
-  "Setembro",
-  "Outubro",
-  "Novembro",
-  "Dezembro",
-];
-
-// ===============================
-// ==== EVENTOS - MODAL DESPESA ====
-// ===============================
 btnAdicionar.addEventListener("click", () => {
   modal.classList.add("active");
   topo.classList.remove("active2");
@@ -62,37 +23,46 @@ modal.addEventListener("click", (e) => {
     topo.classList.add("active2");
   }
 });
+// ====Botão de Adicionar====//
 
-const modalConfirmar = document.getElementById("modalConfirmar");
-const btnConfirmar = document.getElementById("confirmarExcluir");
-const btnCancelar = document.getElementById("cancelarExcluir");
+// ====Adicionar Despesas====//
+const form = document.getElementById("formDespesa");
+const tabela = document.getElementById("despesas");
+const totalSpan = document.getElementById("total");
+const selectMes = document.getElementById("mes");
 
-btnConfirmar.addEventListener("click", () => {
-  despesas = despesas.filter((d) => d.id !== idParaExcluir);
+let despesas = [];
+let categorias = [];
+let editandoId = null;
 
-  salvarLocalStorage();
-  render();
+const meses = [
+  "Janeiro",
+  "Fevereiro",
+  "Março",
+  "Abril",
+  "Maio",
+  "Junho",
+  "Julho",
+  "Agosto",
+  "Setembro",
+  "Outubro",
+  "Novembro",
+  "Dezembro",
+];
 
-  modalConfirmar.classList.remove("active");
-  idParaExcluir = null;
-});
-
-btnCancelar.addEventListener("click", () => {
-  modalConfirmar.classList.remove("active");
-  idParaExcluir = null;
-});
-
-// ===============================
-// ==== EVENTO - TROCA DE MÊS ====
-// ===============================
 selectMes.addEventListener("change", () => {
   localStorage.setItem("mesSelecionado", selectMes.value);
   render();
 });
 
-// ===============================
-// ==== LOCAL STORAGE (DESPESAS) ====
-// ===============================
+function carregarMesSelecionado() {
+  const mesSalvo = localStorage.getItem("mesSelecionado");
+
+  if (mesSalvo) {
+    selectMes.value = mesSalvo;
+  }
+}
+
 function salvarLocalStorage() {
   localStorage.setItem("despesas", JSON.stringify(despesas));
 }
@@ -104,9 +74,6 @@ function carregarLocalStorage() {
   }
 }
 
-// ===============================
-// ==== LOCAL STORAGE (CATEGORIAS) ====
-// ===============================
 function salvarCategorias() {
   localStorage.setItem("categorias", JSON.stringify(categorias));
 }
@@ -118,23 +85,12 @@ function carregarCategorias() {
   }
 }
 
-// ===============================
-// ==== SALVAR MÊS SELECIONADO ====
-// ===============================
-function carregarMesSelecionado() {
-  const mesSalvo = localStorage.getItem("mesSelecionado");
-  if (mesSalvo) {
-    selectMes.value = mesSalvo;
-  }
-}
+const selectCategoria = document.getElementById("categoria");
+const modalCategoria = document.getElementById("modalCategoria");
 
-// ===============================
-// ==== EVENTOS - CATEGORIA ====
-// ===============================
 selectCategoria.addEventListener("change", () => {
   if (selectCategoria.value === "nova") {
     modalCategoria.classList.add("active");
-    renderCategoriasLista();
   }
 });
 
@@ -156,6 +112,71 @@ document.getElementById("salvarCategoria").addEventListener("click", () => {
   modalCategoria.classList.remove("active");
 });
 
+function atualizarSelectCategorias() {
+  selectCategoria.innerHTML = `
+    <option value="">Categoria</option>
+    <option value="nova">+ Criar nova categoria</option>
+  `;
+
+  categorias.forEach((cat) => {
+    const option = document.createElement("option");
+    option.value = cat.id;
+    option.textContent = cat.nome;
+    selectCategoria.appendChild(option);
+  });
+}
+
+function renderCategoriasLista() {
+  const lista = document.getElementById("listaCategorias");
+  lista.innerHTML = "";
+
+  categorias.forEach((cat) => {
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+      <span style="
+        background:${cat.cor};
+        padding:4px 8px;
+        border-radius:15px;
+        color:white;
+      ">
+        ${cat.nome}
+      </span>
+
+      <button onclick="removerCategoria(${cat.id})" style="background: rgb(255, 67, 67); color: white; border-radius: 15px; margin-top: 15px; margin-bottom: 15px; width: 150px">Excluir</button>
+    `;
+
+    lista.appendChild(li);
+  });
+}
+
+function removerCategoria(id) {
+  // remove categoria
+  categorias = categorias.filter((c) => c.id !== id);
+
+  // remove das despesas
+  despesas.forEach((d) => {
+    if (d.categoria && d.categoria.id === id) {
+      d.categoria = null;
+    }
+  });
+
+  salvarCategorias();
+  salvarLocalStorage();
+
+  atualizarSelectCategorias();
+  renderCategoriasLista();
+  carregarMesSelecionado();
+  render();
+}
+
+selectCategoria.addEventListener("change", () => {
+  if (selectCategoria.value === "nova") {
+    modalCategoria.classList.add("active");
+    renderCategoriasLista();
+  }
+});
+
 const fecharCategoria = document.getElementById("fecharCategoria");
 
 fecharCategoria.addEventListener("click", () => {
@@ -168,9 +189,6 @@ modalCategoria.addEventListener("click", (e) => {
   }
 });
 
-// ===============================
-// ==== ATUALIZAR SELECTS DE CATEGORIA ====
-// ===============================
 function atualizarSelectCategorias() {
   selectCategoria.innerHTML = `
     <option value="">Categoria</option>
@@ -194,64 +212,8 @@ function atualizarSelectCategorias() {
   });
 }
 
-// ===============================
-// ==== LISTA DE CATEGORIAS ====
-// ===============================
-function renderCategoriasLista() {
-  const lista = document.getElementById("listaCategorias");
-  lista.innerHTML = "";
-
-  categorias.forEach((cat) => {
-    const li = document.createElement("li");
-
-    li.innerHTML = `
-      <span style="
-        background:${cat.cor};
-        padding:4px 8px;
-        border-radius:15px;
-        color:white;
-      ">
-        ${cat.nome}
-      </span>
-
-      <button onclick="removerCategoria(${cat.id})">
-        Excluir
-      </button>
-    `;
-
-    lista.appendChild(li);
-  });
-}
-
-// ===============================
-// ==== REMOVER CATEGORIA ====
-// ===============================
-function removerCategoria(id) {
-  categorias = categorias.filter((c) => c.id !== id);
-
-  despesas.forEach((d) => {
-    if (d.categoria && d.categoria.id === id) {
-      d.categoria = null;
-    }
-  });
-
-  salvarCategorias();
-  salvarLocalStorage();
-
-  atualizarSelectCategorias();
-  renderCategoriasLista();
-  carregarMesSelecionado();
-  render();
-}
-
-// ===============================
-// ==== FILTRO DE CATEGORIA ====
-// ===============================
 filtroCategoria.addEventListener("change", render);
 
-// ===============================
-// ==== FORMATAR VALOR ====
-// ===============================
 function formatarValor(valor) {
   return valor.toLocaleString("pt-BR", {
     style: "currency",
@@ -259,9 +221,6 @@ function formatarValor(valor) {
   });
 }
 
-// ===============================
-// ==== FORMULÁRIO (ADICIONAR / EDITAR) ====
-// ===============================
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -304,9 +263,6 @@ form.addEventListener("submit", (e) => {
   render();
 });
 
-// ===============================
-// ==== FILTRAR DESPESAS POR MÊS ====
-// ===============================
 function despesasDoMes(mesIndex) {
   return despesas.filter((d) => {
     if (d.fixo) return true;
@@ -316,9 +272,6 @@ function despesasDoMes(mesIndex) {
   });
 }
 
-// ===============================
-// ==== RENDER (CORAÇÃO DO APP) ====
-// ===============================
 function render() {
   tabela.innerHTML = "";
 
@@ -334,13 +287,11 @@ function render() {
   let total = 0;
   let totalCategoria = 0;
 
-  lista.forEach((d) => {
+  lista.forEach((d, index) => {
     const card = document.createElement("div");
     card.classList.add("card-despesa");
-
     const parcelaAtual = mesIndex - d.mesInicio + 1;
 
-    total += d.valor;
     totalCategoria += d.valor;
 
     const chave = `${d.id}-${mesIndex}`;
@@ -350,47 +301,49 @@ function render() {
       card.classList.add("pago");
     }
 
+    let parcelaTexto;
+    if (d.fixo) {
+      parcelaTexto = "Fixo";
+    } else {
+      parcelaTexto = `${parcelaAtual}/${d.parcelas}`;
+    }
+
+    total += d.valor;
+
     card.innerHTML = `
-      <div class="linha"><strong>Descrição:</strong> ${d.descricao}</div>
-      <div class="linha valor"><strong>Valor:</strong> ${formatarValor(d.valor)}</div>
+  <div class="linha"><strong>Descrição:</strong> ${d.descricao}</div>
+  <div class="linha valor"><strong>Valor:</strong> ${formatarValor(d.valor)}</div>
 
-      <div class="linha">
-        <strong>Categoria:</strong> 
-        <span class="tag" style="background:${d.categoria?.cor}">
-          ${d.categoria?.nome || "Sem categoria"}
-        </span>
-      </div>
+  <div class="linha">
+    <strong>Categoria:</strong> 
+    <span class="tag" style="background:${d.categoria?.cor}">
+      ${d.categoria?.nome || "Sem categoria"}
+    </span>
+  </div>
 
-      <div class="linha">
-        <strong>Parcelas:</strong> ${d.fixo ? "Fixo" : `${parcelaAtual}/${d.parcelas}`}
-      </div>
+  <div class="linha">
+    <strong>Parcelas:</strong> ${parcelaAtual}/${d.parcelas}
+  </div>
 
-      <div class="linha pago-linha">
-        <strong>Pago:</strong>
-        <input type="checkbox"
-          ${estaPago ? "checked" : ""}
-          onchange="togglePago(${d.id}, ${mesIndex})">
-      </div>
+  <div class="linha pago-linha">
+    <strong><span>Pago:</span></strong>
+    <input type="checkbox"
+      ${estaPago ? "checked" : ""}
+      onchange="togglePago(${d.id}, ${mesIndex})">
+  </div>
 
-      <div class="botoes">
-        <button onclick="editar(${d.id})">Editar</button>
-        <button onclick="remover(${d.id})">Excluir</button>
-      </div>
-    `;
+  <div class="botoes">
+    <button onclick="editar(${d.id})" style="color: white;">Editar</button>
+    <button onclick="remover(${d.id})">Excluir</button>
+  </div>
+`;
 
     tabela.appendChild(card);
   });
 
   totalSpan.textContent = formatarValor(total);
-
-  totalCategoriaSpan.textContent = filtroId
-    ? `Total da categoria: ${formatarValor(totalCategoria)}`
-    : "";
 }
 
-// ===============================
-// ==== TOGGLE PAGO ====
-// ===============================
 function togglePago(id, mesIndex) {
   const despesa = despesas.find((d) => d.id === id);
   const chave = `${id}-${mesIndex}`;
@@ -401,18 +354,13 @@ function togglePago(id, mesIndex) {
   render();
 }
 
-// ===============================
-// ==== REMOVER DESPESA ====
-// ===============================
 function remover(id) {
-  console.log("clicou em excluir", id);
-  idParaExcluir = id;
-  modalConfirmar.classList.add("active");
+  despesas = despesas.filter((d) => d.id !== id);
+
+  salvarLocalStorage();
+  render();
 }
 
-// ===============================
-// ==== EDITAR DESPESA ====
-// ===============================
 function editar(id) {
   const d = despesas.find((d) => d.id === id);
 
@@ -428,21 +376,15 @@ function editar(id) {
   topo.classList.remove("active2");
 }
 
-// ===============================
-// ==== INICIALIZAÇÃO ====
-// ===============================
 carregarCategorias();
 atualizarSelectCategorias();
 carregarLocalStorage();
 carregarMesSelecionado();
 render();
 
-// ===============================
-// ==== SERVICE WORKER (PWA) ====
-// ===============================
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
     .register("service-worker.js")
-    .then(() => console.log("Service Worker registrado"))
-    .catch((err) => console.log("Erro SW:", err));
+    .then(() => console.log("Service Worker registrado"));
 }
+// ====Adicionar Despesas====//

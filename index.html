@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#121212">
     <link rel="stylesheet" href="style.css">
     <title>Controle Financeiro</title>
 </head>
@@ -11,70 +13,108 @@
 <body>
 
     <div class="container" id="container">
-        <div class="trilho" id="trilho">
-            <div class="indicador"><h6>Dark</h6></div>
+        <div class="topo active2" id="topo">
+            <h1>Controle Financeiro</h1>
+
+            <select id="mes">
+                <option value="Janeiro">Janeiro</option>
+                <option value="Fevereiro">Fevereiro</option>
+                <option value="Março">Março</option>
+                <option value="Abril">Abril</option>
+                <option value="Maio">Maio</option>
+                <option value="Junho">Junho</option>
+                <option value="Julho">Julho</option>
+                <option value="Agosto">Agosto</option>
+                <option value="Setembro">Setembro</option>
+                <option value="Outubro">Outubro</option>
+                <option value="Novembro">Novembro</option>
+                <option value="Dezembro">Dezembro</option>
+            </select>
         </div>
-        <h1>Controle Financeiro</h1>
 
-        <select id="mes">
-            <option value="Janeiro">Janeiro</option>
-            <option value="Fevereiro">Fevereiro</option>
-            <option value="Março">Março</option>
-            <option value="Abril">Abril</option>
-            <option value="Maio">Maio</option>
-            <option value="Junho">Junho</option>
-            <option value="Julho">Julho</option>
-            <option value="Agosto">Agosto</option>
-            <option value="Setembro">Setembro</option>
-            <option value="Outubro">Outubro</option>
-            <option value="Novembro">Novembro</option>
-            <option value="Dezembro" selected>Dezembro</option>
-        </select>
+        <div class="filtro-categoria">
+            <select id="filtroCategoria">
+                <option value="">Todas categorias</option>
+            </select>
+        </div>
 
-        <form>
-            <div class="inputs" id="input">
-                <input type="text" id="descrição" placeholder="Descrição">
-                <input type="text" id="valor" inputmode="decimal" placeholder="Valor">
-                <input type="date" id="vencimento" placeholder="Vencimento">
-                <input type="text" id="categoria" placeholder="Categoria">
-                <input type="number" id="parcelas" placeholder="Parcelas">
-                <div class="gasto-fixo">
-                    <input type="checkbox" id="fixo">
-                    <label for="fixo">Gasto fixo</label>
-                </div>
+        <h3 id="totalCategoria" style="text-align:center;"></h3>
+
+
+        <button id="btnAdicionar" class="btn-add">+</button>
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h2>Nova Despesa</h2>
+
+                <form id="formDespesa">
+                    <div class="inputs" id="input">
+                        <input type="text" id="descricao" placeholder="Descrição">
+                        <input type="text" id="valor" inputmode="decimal" placeholder="Valor">
+                        <select class="categoria" id="categoria">
+                            <option value="">Categoria</option>
+                            <option value="nova">+ Criar nova categoria</option>
+                        </select>
+                        <input type="number" id="parcelas" placeholder="Parcelas">
+                        <div class="gasto-fixo">
+                            <input type="checkbox" id="fixo">
+                            <label for="fixo">Gasto fixo</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="save">Salvar</button>
+                    <button type="button" id="fecharModal" class="cancel">Cancelar</button>
+                </form>
+
             </div>
-            <button type="submit">Adicionar</button>
-        </form>
+        </div>
+
+        <div id="modalCategoria" class="modal">
+            <div class="modal-content">
+                <h2>Nova Categoria</h2>
+
+                <input type="text" id="novaCategoriaNome" placeholder="Nome da categoria">
+
+                <strong>Selecione uma cor:</strong>
+                <input type="color" id="novaCategoriaCor" class="categoriaCor">
+
+                <button id="salvarCategoria">Salvar</button>
+
+                <hr>
+
+                <h3>Categorias criadas</h3>
+                <ul id="listaCategorias"></ul>
+
+                <button id="fecharCategoria">Cancelar</button>
+            </div>
+        </div>
+
+        <div id="modalConfirmar" class="modal">
+            <div class="modal-content">
+                <h3>Tem certeza que deseja excluir?</h3>
+
+                <button id="confirmarExcluir" class="save">Sim</button>
+                <button id="cancelarExcluir" class="cancel">Cancelar</button>
+            </div>
+        </div>
+
 
         <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Descrição</th>
-                        <th>Valor</th>
-                        <th>Categoria</th>
-                        <th>Parcelas</th>
-                        <th>Vencimento</th>
-                        <th>Pago</th>
-                        <th>Excluir</th>
-                    </tr>
-                </thead>
-                <tbody id="despesas"></tbody>
-            </table>
+            <div id="despesas" class="lista-despesas"></div>
         </div>
 
-        <div class="total">
+        <div class="total active2" id="total2">
             <h3>Total: <span id="total">R$ 0,00</span></h3>
         </div>
     </div>
 
     <footer>
-        <p>Desenvolvido por 
+        <p>Desenvolvido por
             <a href="https://github.com/samuelcastro787" target="_blank" rel="noopener noreferrer">
                 <strong>Samuel Castro</strong>
             </a>
         </p>
     </footer>
+
 
     <script src="script.js"></script>
 </body>

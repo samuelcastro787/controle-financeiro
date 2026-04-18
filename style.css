@@ -1,627 +1,505 @@
 /* ===== ESTILOS GERAIS ===== */
 body {
-    font-family: sans-serif;
-    background-color: #222;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-
-/* === Modo Dark === */
-.trilho {
-    display: flex;
-    flex-direction: column;
-    left: 680px;
-    width: 80px;
-    height: 40px;
-    background-color: #4d4d4d;
-    border-radius: 150px;
-    cursor: pointer;
-}
-
-.trilho .indicador {
-    width: 40px;
-    height: 40px;
-    background-color: #111;
-    border-radius: 50%;
-    transform: scale(.9);
-    position: relative;
-    left: 0;
-    transition: .4s;
-}
-
-.trilho.dark {
-    background-color: #c3c3c3;
-}
-
-.trilho.dark .indicador {
-    left: 40px;
-    background-color: #fff;
-}
-
-body.dark {
-    background-color: #e4e4e4;
-}
-
-h6 {
-    position: relative;
-    bottom: 19px;
-    left: 5px;
-    font-size: smaller;
-}
-
-/* Inputs brancos no modo dark */
-input.dark {
-    background-color: white;
-    color: black;
-    border: 1px solid #444;
-}
-
-input:focus.dark {
-    border: 1px solid #444;
-    box-shadow: 0 0 6px #444;
-}
-
-/* Tabela no modo dark */
-table.dark,
-th.dark,
-td.dark {
-    background-color: white;
-    color: black;
-    border-color: #888;
-}
-
-/* Container no modo dark */
-.container.dark {
-    background-color: rgba(255, 255, 255, 0.9);
-    color: #111;
+  display: flex;
+  font-family: sans-serif;
+  background-color: #222;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 /* === Container === */
 .container {
-    background-color: #333;
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 800px;
-    box-sizing: border-box;
+  background-color: #333;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 480px; /* 🔥 padrão mobile */
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 /* ===== TÍTULO E SELETOR DE MÊS ===== */
 h1 {
-    text-align: center;
-    padding-bottom: 20px;
+  text-align: center;
+  padding-bottom: 20px;
 }
 
 .container h1 {
-    font-size: 35px;
+  font-size: 35px;
 }
 
 #mes {
-    display: block;
-    margin: 0 auto 15px;
-    padding: 10px;
-    border-radius: 15px;
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    width: 120px;
-    text-align: center;
+  display: block;
+  margin: 0 auto 15px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  width: 120px;
+  text-align: center;
+}
+
+option {
+  background-color: #333;
+  color: white;
+}
+
+#novaCategoriaCor {
+  width: 100%;
+  height: 40px; /* 🔥 aumenta a altura */
+  border-radius: 20px;
+  border: 2px solid #fff;
+  background: none;
+  padding: 10px;
+  cursor: pointer;
 }
 
 /* ===== INPUTS EM DUAS COLUNAS ===== */
 .inputs {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 10px;
-    width: 100%;
-    box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
-
-
 
 input {
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #444;
-    color: white;
-    text-align: center;
-    border: 1px solid white;
-    width: 100%;
-    box-sizing: border-box;
-    transition: all 0.2s ease;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #444;
+  color: white;
+  text-align: center;
+  border: 1px solid white;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
 }
-
 
 input:focus,
 select:focus {
-    outline: none;
-    border: 1px solid white;
-    box-shadow: 0 0 6px white;
+  outline: none;
+  border: 1px solid white;
+  box-shadow: 0 0 6px white;
 }
 
-
 input::placeholder {
-    text-align: center;
+  text-align: center;
 }
 
 #fixo {
-    width: 15px;
-    margin-left: 10px;
+  width: 15px;
+  margin-left: 10px;
 }
 
-button {
-    display: block;
-    margin: 20px auto 15px;
-    padding: 10px;
-    border-radius: 15px;
-    background-color: #4a90e2;
-    color: white;
-    border: none;
-    width: 100%;
-    max-width: 600px;
-    text-align: center;
-    cursor: pointer;
-    transition: background 0.3s;
+.save {
+  display: block;
+  margin: 20px auto 15px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: rgb(0, 168, 0);
+  color: white;
+  border: none;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
-button:hover {
-    background-color: #357ac9;
+.save:hover {
+  background-color: rgb(0, 126, 0);
 }
 
-/* ===== TABELA ===== */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 10px;
-    word-wrap: break-word;
-    table-layout: fixed;
-    /* faz o conteúdo se ajustar */
+.cancel {
+  display: block;
+  margin: 20px auto 15px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: rgb(235, 53, 53);
+  color: white;
+  border: none;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
-th,
-td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-th {
-    background-color: #444;
-    color: white;
-}
-
-th.dark {
-    background-color: white;
-    color: black;
+.cancel:hover {
+  background-color: rgb(194, 24, 24);
 }
 
 h3 {
-    margin-top: 30px;
-    text-align: center;
+  margin-top: 30px;
+  text-align: center;
 }
 
-.excluir {
-    width: 80px;
-    background-color: rgb(255, 67, 67);
+.card-despesa {
+  background: #333;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.filtro-categoria {
-    text-align: center;
-    margin-bottom: 10px;
+.card-despesa .linha {
+  font-size: 0.95rem;
 }
 
-#filtroCategoria {
-    padding: 8px;
-    border-radius: 10px;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.774);
-    color: black;
-    border: none;
-    width: 150px;
+.card-despesa .valor {
+  color: #4caf50;
+  font-weight: bold;
 }
 
-select:focus {
-    outline: none;
-    border: 1px solid #4a90e2;
-    box-shadow: 0 0 6px #4a90e2;
+.card-despesa .botoes {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.card-despesa button {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.card-despesa button:first-child {
+  background: #f0ad4e;
+}
+
+.card-despesa button:last-child {
+  background: #d9534f;
+  color: white;
+}
+
+.lista-despesas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
 }
 
 .gasto-fixo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    justify-content: flex-start;
-    margin-top: 10px;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-start;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .gasto-fixo label {
-    font-size: 0.95rem;
+  font-size: 0.95rem;
 }
 
 html,
 body {
-    max-width: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.modal {
+  display: none; /* escondido por padrão */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.active {
+  display: block; /* aparece quando tem a classe active */
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 /* Garante que nada ultrapasse a largura da tela */
 .container,
 .inputs,
 table {
-    overflow-x: hidden;
+  overflow-x: hidden;
 }
 
 /* ===== RODAPÉ ===== */
 footer {
-    text-align: center;
-    padding: 15px;
-    color: #aaa;
-    font-size: 0.9rem;
-    margin-top: 20px;
-    background-color: #111;
-    border-top: 1px solid #444;
-    border-radius: 0 0 20px 20px;
+  text-align: center;
+  padding: 15px;
+  color: #aaa;
+  font-size: 0.9rem;
+  margin-top: 20px;
+  margin-bottom: 70px;
+  background-color: #111;
+  border-top: 1px solid #444;
+  border-radius: 0 0 20px 20px;
 }
 
 footer strong {
-    color: #4a90e2;
+  color: #4a90e2;
 }
 
 footer p {
-    margin: 0;
+  margin: 0;
 }
 
 footer a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-tr.fixo,
-tbody tr.fixo {
-    background-color: rgba(255, 215, 0, 0.12) !important;
+/* BOTÃO FLUTUANTE */
+.btn-add {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 30px;
+  border: none;
+  background-color: #4a90e2;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #333;
+  padding: 20px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.total {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  backdrop-filter: blur(2px);
+  width: 100%;
+  max-width: 800px;
+  background-color: transparent;
+  border-top: 1px solid #444;
+  padding: 2px;
+  text-align: center;
+
+  z-index: 1000;
+}
+
+.lista-wrapper {
+  padding-bottom: 80px;
+  margin-top: 100px;
+}
+
+.topo.active2 {
+  position: relative;
+  top: 0;
+  transform: translateX(-50%);
+  left: 50%;
+  backdrop-filter: blur(2px);
+  width: 100%;
+  max-width: 800px;
+  background-color: transparent;
+  border-top: 1px solid #444;
+  padding: 15px;
+  text-align: center;
+  z-index: 1000;
+}
+
+.topo {
+  display: block;
+}
+
+#listaCategorias {
+  max-height: 100px;
+  overflow-y: auto;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+.pago {
+  opacity: 0.6;
+  filter: brightness(0.8);
+  text-decoration: line-through;
+}
+
+.pago-linha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filtro-categoria {
+  display: block;
+  margin: 0 auto 15px;
+  color: white;
+  border: none;
+  width: 200px;
+  text-align: center;
+}
+
+#filtroCategoria {
+  border-radius: 20px;
+}
+
+#totalCategoria {
+  margin: 10px 0;
+  color: #4caf50;
+}
+
+.categoria {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #444;
+  color: white;
+  text-align: center;
+  border: 1px solid white;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+select {
+  text-align: center;
+  text-align-last: center;
+}
+
+select:focus {
+  border: 1px solid white;
+  outline: none;
+  box-shadow: 0 0 6px white;
+}
 
 /* ===== RESPONSIVIDADE ===== */
 
 @media (min-width: 685px) {
-    body {
-        flex-direction: column;
-        align-items: center;
-    }
+  body {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .container {
-        margin-bottom: 20px;
-    }
+  .container {
+    margin-bottom: 20px;
+  }
 
-    footer {
-        width: 100%;
-        max-width: 800px;
-        border-radius: 0 0 20px 20px;
-    }
+  footer {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 0 0 20px 20px;
+  }
 }
-
 
 /* Telas pequenas (celular) */
 @media (max-width: 684px) {
+  body {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+  }
 
-    body {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 10px;
-    }
+  .container {
+    background-color: #222;
+    width: 100%;
+    padding: 15px;
+    border-radius: 0;
+    box-shadow: none;
+  }
 
-    .container {
-        background-color: #222;
-        width: 100%;
-        padding: 15px;
-        border-radius: 0;
-        box-shadow: none;
-    }
+  h1 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
 
-    /* === Modo Dark === */
-    .container.dark {
-        background-color: #e4e4e4;
-        width: 100%;
-        padding: 15px;
-        border-radius: 0;
-        box-shadow: none;
-    }
+  .pago-linha {
+    justify-content: space-between;
+  }
 
-    body.dark tbody tr {
-        background-color: #fff !important;
-        color: #000 !important;
-        border-color: #ccc !important;
-    }
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+  }
 
-    /* rótulos */
-    body.dark tbody tr td::before {
-        color: #333 !important;
-    }
+  input,
+  select,
+  button,
+  #filtroCategoria {
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
 
-    /* valores e botões */
-    body.dark td[data-label="Valor"] {
-        color: #0c7a43 !important;
-    }
+  .gasto-fixo {
+    justify-content: center;
+  }
 
-    body.dark td[data-label="excluir"] button {
-        background-color: #ff4d4d !important;
-        color: #fff !important;
-    }
+  #mes {
+    width: 60%;
+    max-width: 200px;
+    padding-bottom: 10px;
+  }
 
+  .excluir {
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 8px;
+    padding: 6px;
+  }
 
+  .total {
+    text-align: center;
+    margin-top: 15px;
+  }
 
+  h3 {
+    font-size: 1.1rem;
+  }
 
-    h1 {
-        font-size: 1.4rem;
-        margin-bottom: 10px;
-        text-align: center;
-    }
-
-    input[type="date"] {
-        position: relative;
-    }
-
-    input[type="date"]::before {
-        content: attr(placeholder);
-        color: #aaa;
-        position: absolute;
-        left: 0;
-        right: 0;
-        text-align: center;
-        pointer-events: none;
-        line-height: 38px;
-        /* ajuste conforme altura */
-    }
-
-    /* Remove o placeholder quando há valor */
-    input[type="date"].has-value::before {
-        content: "";
-    }
-
-
-
-
-    table,
-    thead,
-    tbody,
-    th,
-    td,
-    tr {
-        display: flex;
-        flex-direction: column;
-    }
-
-    thead {
-        display: none;
-    }
-
-    tbody tr {
-        background: #333;
-        color: white;
-        border: 1px solid #555;
-        border-radius: 10px;
-        padding: 12px;
-        margin-bottom: 15px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    tbody tr td {
-        display: flex;
-        flex-direction: row;
-        padding: 6px 0;
-        border: none;
-        font-size: 0.95rem;
-    }
-
-    /* Rótulo de cada campo */
-    tbody tr td::before {
-        content: attr(data-label) ": ";
-        font-weight: bold;
-        text-transform: capitalize;
-        margin-right: 6px;
-        color: #ccc;
-    }
-
-    tbody tr td[data-label="Categoria"],
-    tbody tr td[data-label="Parcelas"],
-    tbody tr td[data-label="Vencimento"],
-    tbody tr td[data-label="Valor"] {
-        position: relative;
-        grid-column: 1;
-        justify-content: flex-start;
-        text-align: left;
-    }
-
-    tbody tr td[data-label="Pago"],
-    tbody tr td[data-label="Excluir"] {
-        grid-column: 2;
-        justify-content: flex-end;
-        text-align: right;
-    }
-
-    tbody tr td[data-label="Pago"] {
-        position: relative;
-        bottom: 60px;
-    }
-
-    /* Para Valor */
-    td[data-label="Valor"] {
-        font-weight: bold;
-        color: #4CAF50;
-    }
-
-    /* Para Pago */
-    td[data-label="Pago"] {
-        position: relative;
-        left: 200px;
-        align-items: center;
-        gap: 8px;
-        width: 30%;
-        font-size: 15px;
-    }
-
-
-    td[data-label="Pago"]::before {
-        content: attr(data-label);
-        order: 2;
-        /* legenda vai depois da checkbox */
-        margin-left: 6px;
-        margin-right: 0;
-    }
-
-    td[data-label="excluir"]::before {
-        content: '';
-    }
-
-    td[data-label="Pago"] input[type="checkbox"] {
-        margin: 3px 3px 3px 3px;
-        order: 1;
-        transform: scale(1.3);
-        justify-content: flex-end;
-        accent-color: #4CAF50;
-        width: 12%;
-        box-sizing: border-box;
-    }
-
-    /* Botão Excluir */
-    td[data-label="excluir"] {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        margin-top: -20px;
-        /* sobe o botão um pouco */
-        padding-bottom: 0;
-    }
-
-    td[data-label="excluir"]::before {
-        content: "";
-    }
-
-    td[data-label="excluir"] button {
-        background: #e53935;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        padding: 6px 10px;
-        font-size: 0.9rem;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-
-    td[data-label="excluir"] button:hover {
-        background: #d32f2f;
-    }
-
-    /* Faz o “card” da linha se ajustar à altura do conteúdo */
-    tbody tr {
-        display: flex;
-        flex-direction: column;
-        background: #333;
-        color: white;
-        border: 1px solid #555;
-        border-radius: 10px;
-        padding: 12px;
-        margin-bottom: 15px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        height: auto;
-        /* garante que a altura acompanhe o conteúdo */
-    }
-
-
-    /* Garante que nada sobre na esquerda */
-    tbody tr td {
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-
-
-
-    /* Inputs passam a ser uma coluna só */
-    .inputs {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 10px;
-        width: 100%;
-    }
-
-    input,
-    select,
-    button,
-    #filtroCategoria {
-        display: block;
-        width: 100%;
-        font-size: 1rem;
-        padding: 10px;
-        margin-bottom: 10px;
-        box-sizing: border-box;
-    }
-
-    .gasto-fixo {
-        justify-content: center;
-    }
-
-    #mes {
-        width: 60%;
-        max-width: 200px;
-        padding-bottom: 10px;
-    }
-
-    .excluir {
-        width: 100%;
-        margin-top: 5px;
-        border-radius: 8px;
-        padding: 6px;
-    }
-
-    .total {
-        text-align: center;
-        margin-top: 15px;
-    }
-
-    h3 {
-        font-size: 1.1rem;
-    }
-
-    footer {
-        border-radius: 0;
-        font-size: 0.85rem;
-        padding: 10px;
-    }
-
-    /* === Destaque para gastos fixos (somente em telas pequenas) === */
-    /* ===== Destaque gasto fixo: corrigir sobreposição no mobile ===== *
-
-        /* estado padrão (modo escuro do app) — leve */
-    tr.fixo,
-    tbody tr.fixo {
-        background-color: rgba(255, 215, 0, 0.12) !important;
-    }
-
-    /* quando estiver em modo claro (body NÃO contém .dark) — tornar mais visível */
-    body:not(.dark) tr.fixo,
-    body:not(.dark) tbody tr.fixo {
-        background-color: rgba(255, 215, 0, 0.35) !important;
-    }
-
-    /* mesmo que exista regra body.dark tbody tr {... !important}, garantir override no modo escuro também */
-    body.dark tr.fixo,
-    body.dark tbody tr.fixo {
-        background-color: rgba(255, 215, 0, 0.12) !important;
-    }
-
-
+  footer {
+    border-radius: 0;
+    font-size: 0.85rem;
+    padding: 10px;
+  }
 }
