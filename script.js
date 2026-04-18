@@ -266,7 +266,8 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const descricao = document.getElementById("descricao").value;
-  const valor = parseFloat(document.getElementById("valor").value);
+  const valorInput = document.getElementById("valor").value;
+  const valor = parseFloat(valorInput.replace(",", "."));
   const parcelas = parseInt(document.getElementById("parcelas").value) || 1;
   const categoriaId = parseInt(selectCategoria.value);
   const categoriaObj = categorias.find((c) => c.id === categoriaId);
