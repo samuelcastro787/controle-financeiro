@@ -441,9 +441,22 @@ render();
 // ===============================
 // ==== SERVICE WORKER (PWA) ====
 // ===============================
-//if ("serviceWorker" in navigator) {
-  //navigator.serviceWorker
-    //.register("service-worker.js")
-    //.then(() => console.log("Service Worker registrado"))
-    //.catch((err) => console.log("Erro SW:", err));
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js")
+    .then((reg) => {
+      console.log("Service Worker registrado");
+
+      reg.onupdatefound = () => {
+        const newWorker = reg.installing;
+
+        newWorker.onstatechange = () => {
+          if (newWorker.state === "installed") {
+            if (navigator.serviceWorker.controller) {
+              alert("Nova versão disponível! Atualize a página.");
+            }
+          }
+        };
+      };
+    })
+    .catch((err) => console.log("Erro SW:", err));
 }
